@@ -12,7 +12,7 @@ const app = express();
 // Middlewares
 app.use(cors());
 app.use(express.json());
-app.use(express.static('public')); // <--- aquí después de app
+app.use(express.static('public')); // servir front-end
 
 // Rutas
 app.use('/api/users', usersRoutes);
@@ -23,7 +23,7 @@ app.use('/api/activity-logs', activityLogsRoutes);
 
 // Ruta de prueba
 app.get('/', (req, res) => {
-  res.json({ message: 'API kcal-tracker funcionando correctamente' });
+  res.sendFile(__dirname + '/public/index.html');
 });
 
 const PORT = process.env.PORT || 3000;
