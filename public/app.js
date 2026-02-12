@@ -1,5 +1,6 @@
 const API_URL = "https://kcal-tracker-fqfx.onrender.com/api";
 
+// --- Usuarios ---
 async function createUser() {
   const name = document.getElementById('name').value;
   const email = document.getElementById('email').value;
@@ -9,16 +10,110 @@ async function createUser() {
   const age = parseInt(document.getElementById('age').value);
 
   try {
-    const response = await fetch(`${API_URL}/users`, {
+    const res = await fetch(`${API_URL}/users`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name, email, password, weight, height, age })
     });
-
-    const data = await response.json();
+    const data = await res.json();
     document.getElementById('userResult').textContent = JSON.stringify(data, null, 2);
-  } catch (err) {
-    console.error('Error al crear usuario:', err);
-    alert('Error al crear usuario. Revisa la consola.');
+  } catch(err) {
+    console.error(err);
+    alert("Error al crear usuario");
+  }
+}
+
+// --- Alimentos ---
+async function createFood() {
+  const name = document.getElementById('foodName').value;
+  const calories = parseFloat(document.getElementById('foodCalories').value);
+  const protein = parseFloat(document.getElementById('foodProtein').value);
+  const carbs = parseFloat(document.getElementById('foodCarbs').value);
+  const fat = parseFloat(document.getElementById('foodFat').value);
+  const fiber = parseFloat(document.getElementById('foodFiber').value);
+
+  try {
+    const res = await fetch(`${API_URL}/foods`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, calories, protein, carbs, fat, fiber })
+    });
+    const data = await res.json();
+    document.getElementById('foodResult').textContent = JSON.stringify(data, null, 2);
+  } catch(err) {
+    console.error(err);
+    alert("Error al crear alimento");
+  }
+}
+
+async function logFood() {
+  const userId = parseInt(document.getElementById('userIdFood').value);
+  const foodId = parseInt(document.getElementById('foodId').value);
+  const quantity = parseFloat(document.getElementById('foodQuantity').value);
+
+  try {
+    const res = await fetch(`${API_URL}/food-logs`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ user_id: userId, food_id: foodId, quantity })
+    });
+    const data = await res.json();
+    document.getElementById('foodLogResult').textContent = JSON.stringify(data, null, 2);
+  } catch(err) {
+    console.error(err);
+    alert("Error al registrar consumo");
+  }
+}
+
+// --- Actividades ---
+async function createActivity() {
+  const name = document.getElementById('activityName').value;
+  const calories_per_minute = parseFloat(document.getElementById('activityCalories').value);
+
+  try {
+    const res = await fetch(`${API_URL}/activities`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, calories_per_minute })
+    });
+    const data = await res.json();
+    document.getElementById('activityResult').textContent = JSON.stringify(data, null, 2);
+  } catch(err) {
+    console.error(err);
+    alert("Error al crear actividad");
+  }
+}
+
+async function logActivity() {
+  const userId = parseInt(document.getElementById('userIdActivity').value);
+  const activityId = parseInt(document.getElementById('activityId').value);
+  const duration = parseFloat(document.getElementById('activityDuration').value);
+
+  try {
+    const res = await fetch(`${API_URL}/activity-logs`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ user_id: userId, activity_id: activityId, duration })
+    });
+    const data = await res.json();
+    document.getElementById('activityLogResult').textContent = JSON.stringify(data, null, 2);
+  } catch(err) {
+    console.error(err);
+    alert("Error al registrar actividad");
+  }
+}
+
+// --- Resumen Diario ---
+async function getSummary() {
+  const userId = parseInt(document.getElementById('userIdSummary').value);
+  const date = document.getElementById('dateSummary').value;
+
+  try {
+    const res = await fetch(`${API_URL}/users/${userId}/summary?date=${date}`);
+    const data = await res.json();
+    document.getElementById('summaryResult').textContent = JSON.stringify(data, null, 2);
+  } catch(err) {
+    console.error(err);
+    alert("Error al obtener resumen");
   }
 }

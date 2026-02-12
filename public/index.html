@@ -6,8 +6,10 @@
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.3/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body class="bg-gray-100 p-8 font-sans">
+
   <h1 class="text-3xl font-bold mb-6 text-center">Kcal Tracker</h1>
 
+  <!-- Crear Usuario -->
   <section class="bg-white p-6 rounded shadow mb-6 max-w-md mx-auto">
     <h2 class="text-xl font-semibold mb-4">Crear Usuario</h2>
     <input id="name" placeholder="Nombre" class="w-full mb-2 p-2 border rounded">
@@ -20,6 +22,49 @@
     <pre id="userResult" class="mt-4 bg-gray-100 p-2 rounded"></pre>
   </section>
 
+  <!-- Crear Alimento -->
+  <section class="bg-white p-6 rounded shadow mb-6 max-w-md mx-auto">
+    <h2 class="text-xl font-semibold mb-4">Crear Alimento</h2>
+    <input id="foodName" placeholder="Nombre" class="w-full mb-2 p-2 border rounded">
+    <input id="foodCalories" type="number" placeholder="Calorías" class="w-full mb-2 p-2 border rounded">
+    <input id="foodProtein" type="number" placeholder="Proteína (g)" class="w-full mb-2 p-2 border rounded">
+    <input id="foodCarbs" type="number" placeholder="Carbohidratos (g)" class="w-full mb-2 p-2 border rounded">
+    <input id="foodFat" type="number" placeholder="Grasa (g)" class="w-full mb-2 p-2 border rounded">
+    <input id="foodFiber" type="number" placeholder="Fibra (g)" class="w-full mb-2 p-2 border rounded">
+    <button onclick="createFood()" class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600">Crear Alimento</button>
+    <pre id="foodResult" class="mt-4 bg-gray-100 p-2 rounded"></pre>
+  </section>
+
+  <!-- Registrar Consumo -->
+  <section class="bg-white p-6 rounded shadow mb-6 max-w-md mx-auto">
+    <h2 class="text-xl font-semibold mb-4">Registrar Consumo</h2>
+    <input id="userIdFood" type="number" placeholder="User ID" class="w-full mb-2 p-2 border rounded">
+    <input id="foodId" type="number" placeholder="Food ID" class="w-full mb-2 p-2 border rounded">
+    <input id="foodQuantity" type="number" placeholder="Cantidad" class="w-full mb-2 p-2 border rounded">
+    <button onclick="logFood()" class="bg-purple-500 text-white px-4 py-2 rounded hover:bg-purple-600">Registrar Consumo</button>
+    <pre id="foodLogResult" class="mt-4 bg-gray-100 p-2 rounded"></pre>
+  </section>
+
+  <!-- Crear Actividad -->
+  <section class="bg-white p-6 rounded shadow mb-6 max-w-md mx-auto">
+    <h2 class="text-xl font-semibold mb-4">Crear Actividad</h2>
+    <input id="activityName" placeholder="Nombre" class="w-full mb-2 p-2 border rounded">
+    <input id="activityCalories" type="number" placeholder="Calorías quemadas por minuto" class="w-full mb-2 p-2 border rounded">
+    <button onclick="createActivity()" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">Crear Actividad</button>
+    <pre id="activityResult" class="mt-4 bg-gray-100 p-2 rounded"></pre>
+  </section>
+
+  <!-- Registrar Actividad -->
+  <section class="bg-white p-6 rounded shadow mb-6 max-w-md mx-auto">
+    <h2 class="text-xl font-semibold mb-4">Registrar Actividad</h2>
+    <input id="userIdActivity" type="number" placeholder="User ID" class="w-full mb-2 p-2 border rounded">
+    <input id="activityId" type="number" placeholder="Activity ID" class="w-full mb-2 p-2 border rounded">
+    <input id="activityDuration" type="number" placeholder="Duración (min)" class="w-full mb-2 p-2 border rounded">
+    <button onclick="logActivity()" class="bg-indigo-500 text-white px-4 py-2 rounded hover:bg-indigo-600">Registrar Actividad</button>
+    <pre id="activityLogResult" class="mt-4 bg-gray-100 p-2 rounded"></pre>
+  </section>
+
+  <!-- Resumen Diario -->
   <section class="bg-white p-6 rounded shadow max-w-md mx-auto">
     <h2 class="text-xl font-semibold mb-4">Resumen Diario</h2>
     <input id="userIdSummary" type="number" placeholder="User ID" class="w-full mb-2 p-2 border rounded">
@@ -30,5 +75,4 @@
 
   <script src="app.js"></script>
 </body>
-
 </html>
