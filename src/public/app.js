@@ -8,21 +8,17 @@ async function createUser() {
   const height = parseFloat(document.getElementById('height').value);
   const age = parseInt(document.getElementById('age').value);
 
-  const response = await fetch(`${API_URL}/users`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ name, email, password, weight, height, age })
-  });
+  try {
+    const response = await fetch(`${API_URL}/users`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, email, password, weight, height, age })
+    });
 
-  const data = await response.json();
-  document.getElementById('userResult').textContent = JSON.stringify(data, null, 2);
-}
-
-async function getSummary() {
-  const userId = document.getElementById('userIdSummary').value;
-  const date = document.getElementById('dateSummary').value;
-
-  const response = await fetch(`${API_URL}/activity-logs/summary-with-balance/${userId}/${date}`);
-  const data = await response.json();
-  document.getElementById('summaryResult').textContent = JSON.stringify(data, null, 2);
+    const data = await response.json();
+    document.getElementById('userResult').textContent = JSON.stringify(data, null, 2);
+  } catch (err) {
+    console.error('Error al crear usuario:', err);
+    alert('Error al crear usuario. Revisa la consola.');
+  }
 }
