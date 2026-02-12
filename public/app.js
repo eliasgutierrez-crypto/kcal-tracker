@@ -36,7 +36,14 @@ async function createFood() {
     const res = await fetch(`${API_URL}/foods`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name, calories, protein, carbs, fat, fiber })
+      body: JSON.stringify({
+        name,
+        calories_per_100g: calories,
+        protein_per_100g: protein,
+        carbs_per_100g: carbs,
+        fat_per_100g: fat,
+        fiber_per_100g: fiber
+      })
     });
     const data = await res.json();
     document.getElementById('foodResult').textContent = JSON.stringify(data, null, 2);
@@ -55,7 +62,7 @@ async function logFood() {
     const res = await fetch(`${API_URL}/food-logs`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ user_id: userId, food_id: foodId, quantity })
+      body: JSON.stringify({ user_id: userId, food_id: foodId, quantity_grams: quantity })
     });
     const data = await res.json();
     document.getElementById('foodLogResult').textContent = JSON.stringify(data, null, 2);
@@ -74,7 +81,7 @@ async function createActivity() {
     const res = await fetch(`${API_URL}/activities`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name, calories_per_minute })
+      body: JSON.stringify({ name, met_value: calories_per_minute })
     });
     const data = await res.json();
     document.getElementById('activityResult').textContent = JSON.stringify(data, null, 2);
@@ -93,7 +100,7 @@ async function logActivity() {
     const res = await fetch(`${API_URL}/activity-logs`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ user_id: userId, activity_id: activityId, duration })
+      body: JSON.stringify({ user_id: userId, activity_id: activityId, duration_minutes: duration })
     });
     const data = await res.json();
     document.getElementById('activityLogResult').textContent = JSON.stringify(data, null, 2);
